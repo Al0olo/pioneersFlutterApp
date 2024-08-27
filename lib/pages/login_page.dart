@@ -117,7 +117,7 @@ class LoginPage extends StatelessWidget {
                 obscureText: true,
               ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: _handleEmailSignIn,
               style: ElevatedButton.styleFrom(
@@ -126,7 +126,7 @@ class LoginPage extends StatelessWidget {
               ),
               child: Text('Login with Email'),
             ),
-            SizedBox(height: 60),
+            SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
