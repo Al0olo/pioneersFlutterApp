@@ -6,6 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+String? authToken;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp(
@@ -91,21 +93,38 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   Future<void> _handleEmailSignUp() async {
-    try {
-      final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      final User? user = userCredential.user;
+    final String email = _emailController.text;
+    final String password = _passwordController.text;
 
-      if (user != null) {
-        // Successfully signed up
-        // Navigate to the home page or perform other actions
-        print('Successfully signed up: ${user.email}');
-      }
-    } catch (error) {
-      print('Error signing up with email: $error');
-      // Handle sign-up error here
+    if (email.isEmpty || password.isEmpty) {
+      // Show error message
+      return;
+    }
+
+    final response = await http.post(
+      Uri.parse('https://yourapi.com/signup'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'email': email,
+        'password': password,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // If the server returns a 200 OK response, parse the JSON.
+      final Map<String, dynamic> responseData = jsonDecode(response.body);
+      authToken = responseData['token'];
+
+      // Store the token using shared_preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('authToken', authToken!);
+
+      // Handle successful signup (e.g., navigate to another page, show success message)
+    } else {
+      // If the server did not return a 200 OK response, throw an exception.
+      // Handle error (e.g., show error message)
     }
   }
 
