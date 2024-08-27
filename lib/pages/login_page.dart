@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import '../firebase_options.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class LoginPage extends StatelessWidget {
@@ -40,10 +41,11 @@ class LoginPage extends StatelessWidget {
     try {
       final LoginResult result = await FacebookAuth.instance.login();
       if (result.status == LoginStatus.success) {
-        final AccessToken accessToken = result.accessToken!;
-        final AuthCredential credential = FacebookAuthProvider.credential(accessToken.token);
-        final UserCredential userCredential = await _auth.signInWithCredential(credential);
-        final User? user = userCredential.user;
+        // final AccessToken accessToken = result.accessToken!;
+        // final AuthCredential credential = FacebookAuthProvider.credential(accessToken);
+        // final UserCredential userCredential = await _auth.signInWithCredential(credential);
+        // final User? user = userCredential.user;
+        final user = null;
 
         if (user != null) {
           // Successfully signed in
@@ -131,7 +133,9 @@ class LoginPage extends StatelessWidget {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 

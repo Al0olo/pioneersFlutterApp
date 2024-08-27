@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "360565703203",
+    "project_id": "pioneers-malysia",
+    "storage_bucket": "pioneers-malysia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360565703203:android:fe9df4ca49910583286796",
+        "android_client_info": {
+          "package_name": "com.pioneers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv3m-hs66C38k3Cgl0ocWU2AEMsbqFIDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
