@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -112,40 +113,71 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Signup Page'),
+        title: Text('Signup'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Sign up with:',
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _handleFacebookSignIn,
-              child: Text('Sign up with Facebook'),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _handleGoogleSignIn,
-              child: Text('Sign up with Google'),
-            ),
-            SizedBox(height: 20),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(labelText: 'Password'),
-              obscureText: true,
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: TextField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                ),
+              ),
             ),
             SizedBox(height: 10),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                ),
+                obscureText: true,
+              ),
+            ),
+            SizedBox(height: 20), // Larger margin after the password field
             ElevatedButton(
               onPressed: _handleEmailSignUp,
-              child: Text('Sign up with Email'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue[900], // Dark blue background
+                foregroundColor: Colors.white, // White text
+              ),
+              child: Text('Signup with Email'),
+            ),
+            SizedBox(height: 30), // Larger margin after the signup button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: _handleGoogleSignIn,
+                  icon: FaIcon(FontAwesomeIcons.google, color: Colors.white),
+                  label: Text('Google'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red, // Google button color
+                    foregroundColor: Colors.white, // Google button color
+                  ),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton.icon(
+                  onPressed: _handleFacebookSignIn,
+                  icon: FaIcon(FontAwesomeIcons.facebook, color: Colors.white),
+                  label: Text('Facebook'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Facebook button color
+                    foregroundColor: Colors.white, // Facebook button color
+                  ),
+                ),
+              ],
             ),
           ],
         ),
