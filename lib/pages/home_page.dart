@@ -4,25 +4,49 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 	return Scaffold(
-	  appBar: AppBar(
-		title: Text('Home Page'),
-	  ),
 	  body: Center(
 		child: Column(
 		  mainAxisAlignment: MainAxisAlignment.center,
 		  children: <Widget>[
-			Text('Welcome to the Home Page!'),
+			FlutterLogo(size: 48), // Flutter icon as a placeholder for the app icon
+			SizedBox(height: 8), // Space between the icon and the title
+			Text(
+			  'Pioneers',
+			  style: TextStyle(
+				fontSize: 32,
+				fontWeight: FontWeight.bold,
+				color: Colors.black,
+			  ),
+			),
+			SizedBox(height: 20), // Space between the title and the buttons
 			ElevatedButton(
 			  onPressed: () {
 				Navigator.pushNamed(context, '/login');
 			  },
-			  child: Text('Go to About Page'),
+			  style: ElevatedButton.styleFrom(
+				backgroundColor: Colors.blue[900], // Dark blue background
+				foregroundColor: Colors.white, // White text
+				textStyle: TextStyle(
+				  fontFamily: 'Sans-serif',
+				  fontSize: 16,
+				),
+			  ),
+			  child: Text('Go to Login Page'),
 			),
+			SizedBox(height: 10),
 			ElevatedButton(
 			  onPressed: () {
 				Navigator.pushNamed(context, '/signup');
 			  },
-			  child: Text('Go to Contact Page'),
+			  style: ElevatedButton.styleFrom(
+				backgroundColor: Colors.blue[900], // Dark blue background
+				foregroundColor: Colors.white, // White text
+				textStyle: TextStyle(
+				  fontFamily: 'Sans-serif',
+				  fontSize: 16,
+				),
+			  ),
+			  child: Text('Go to Signup Page'),
 			),
 		  ],
 		),

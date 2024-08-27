@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../firebase_options.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class LoginPage extends StatelessWidget {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -81,33 +83,39 @@ class LoginPage extends StatelessWidget {
     }
   }
 
-  @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Login'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Welcome to the Login Page!',
-              style: TextStyle(fontSize: 24),
-            ),
-            SizedBox(height: 20),
-            TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                ),
               ),
             ),
-            TextFormField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
+            SizedBox(height: 10),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                ),
+                obscureText: true,
               ),
-              obscureText: true,
             ),
             SizedBox(height: 10),
             ElevatedButton(
@@ -115,39 +123,33 @@ class LoginPage extends StatelessWidget {
               child: Text('Login with Email'),
             ),
             SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _handleGoogleSignIn,
-              child: Text('Login with Google'),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _handleFacebookSignIn,
-              child: Text('Login with Facebook'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton.icon(
+                  onPressed: _handleGoogleSignIn,
+                  icon: FaIcon(FontAwesomeIcons.google, color: Colors.white),
+                  label: Text('Google'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red, // Google button color
+                    foregroundColor: Colors.white, // Google button color
+                  ),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton.icon(
+                  onPressed: _handleFacebookSignIn,
+                  icon: FaIcon(FontAwesomeIcons.facebook, color: Colors.white),
+                  label: Text('Facebook'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue, // Facebook button color
+                    foregroundColor: Colors.white, // Facebook button color
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginPage(),
     );
   }
 }
