@@ -117,12 +117,16 @@ class LoginPage extends StatelessWidget {
                 obscureText: true,
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 30),
             ElevatedButton(
               onPressed: _handleEmailSignIn,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue[900], // Dark blue background
+                foregroundColor: Colors.white, // White text
+              ),
               child: Text('Login with Email'),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 60),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
